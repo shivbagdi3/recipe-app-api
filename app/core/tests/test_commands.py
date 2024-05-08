@@ -28,8 +28,7 @@ class CommandTests(SimpleTestCase):
         """Test waiting for database when getting OperationsalError. """
         pathed_check.side_effect = [Psycopg2Error] * 2 + \
             [OperationalError] * 3 + [True]
-        
         call_command('wait_for_db')
 
         self.assertEqual(pathed_check.call_count, 6)
-        pathed_check.assert_called_with(databases=['default']) 
+        pathed_check.assert_called_with(databases=['default'])
